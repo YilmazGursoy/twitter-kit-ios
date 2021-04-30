@@ -17,10 +17,11 @@
 
 #import "TWTRWebViewController.h"
 #import <TwitterCore/TWTRAuthenticationConstants.h>
+#import <WebKit/WKWebView.h>
 
-@interface TWTRWebViewController () <UIWebViewDelegate>
+@interface TWTRWebViewController ()
 
-@property (nonatomic, strong) UIWebView *webView;
+@property (nonatomic, strong) WKWebView *webView;
 @property (nonatomic, assign) BOOL showCancelButton;
 @property (nonatomic, copy) TWTRWebViewControllerCancelCompletion cancelCompletion;
 
@@ -65,10 +66,10 @@
 
 - (void)loadView
 {
-    [self setWebView:[[UIWebView alloc] init]];
-    [[self webView] setScalesPageToFit:YES];
-    [[self webView] setDelegate:self];
-    [self setView:[self webView]];
+//    [self setWebView:[[UIWebView alloc] init]];
+//    [[self webView] setScalesPageToFit:YES];
+//    [[self webView] setDelegate:self];
+//    [self setView:[self webView]];
 }
 
 #pragma mark - UIWebview delegate
@@ -99,10 +100,8 @@
 
 - (BOOL)whitelistedDomain:(NSURLRequest *)request
 {
-    NSString *whitelistedHostWildcard = [@"." stringByAppendingString:TWTRTwitterDomain];
-    NSURL *url = request.URL;
-    NSString *host = url.host;
-    return ([host isEqualToString:TWTRTwitterDomain] || [host hasSuffix:whitelistedHostWildcard] || ([TWTRSDKScheme isEqualToString:url.scheme] && [TWTRSDKRedirectHost isEqualToString:host]));
+//
+    return  YES;
 }
 
 - (void)cancel
